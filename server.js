@@ -2,7 +2,7 @@ const express = require("express");
 const path = require("path");
 
 const complements = [
-    "You like nice today",
+    "You look nice today",
     "That dress looks nice on you",
     "Have you been working out?",
     "You can do hard things",
@@ -13,8 +13,21 @@ const complements = [
     "You've learned a lot of things, and that's pretty hard to do"
 ]
 
+const insults = [
+    "Your mother was a hampster, and your father smelt of eldeberries!",
+    "Go away away or I shall taunt you a second time!",
+    "I fart in your general direction!",
+    "You don't frighten us, English pig dogs.",
+    "Go and boil your bottoms, you sons of a silly person. I blow my nose at you.",
+    "I don't want to talk to you no more, you empty headed animal food trough wiper."
+]
+
 function getRandomComplement() {
     return complements[Math.floor(Math.random() * complements.length)]
+}
+
+function getRandomInsult() {
+    return insults[Math.floor(Math.random() * insults.length)]
 }
 
 const app = express();
@@ -30,6 +43,14 @@ app.get("/complement", function (req, res) {
         })
         .end();
 });
+
+app.get("/insult", function (req, res) {
+    res
+        .json({
+            insult: getRandomInsult()
+        })
+        .end();
+})
 
 app.use("/public", express.static("./public"));
 
